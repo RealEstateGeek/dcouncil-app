@@ -20,9 +20,11 @@ Route::get('/posts', function () {
     ]);
 });
 
-Route::get('/posts/{postId}', function($postId) {
+// Route-model binding, when we type hint 'Post' here, it tries to find a Post using binding key 'id'
+// For tweaking, see Post->getRouteKeyName
+Route::get('/posts/{post}', function(Post $post) {
     return view('post', [
-        'post' => Post::findOrFail($postId)
+        'post' => $post
     ]);
 });
 
