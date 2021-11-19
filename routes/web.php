@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 
@@ -20,7 +21,7 @@ Route::get('/posts', function () {
     ]);
 });
 
-// Route-model binding, when we type hint 'Post' here, it tries to find a Post using binding key 'id'
+// Route-model binding, when we type-hint 'Post' here, it tries to find a Post using binding key 'id'
 // For tweaking, see Post->getRouteKeyName
 Route::get('/posts/{post}', function(Post $post) {
     return view('post', [
@@ -28,7 +29,9 @@ Route::get('/posts/{post}', function(Post $post) {
     ]);
 });
 
-// Plain text return, no view interpretation
-Route::get('/blah', function () {
-    return 'blah';
+// Using the category slug to display all posts related to a particular category
+Route::get('/categories/{category:slug}', function(Category $category) {
+    return view('posts', [
+        'posts' => $category->posts
+    ]);
 });

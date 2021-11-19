@@ -1,4 +1,5 @@
 @extends('components/layout')
+
 @section('content')
     <article>
         <h1>
