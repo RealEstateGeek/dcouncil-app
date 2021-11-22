@@ -7,12 +7,11 @@
 
             @if(count($posts) > 1)
                 <x-posts-grid :posts="$posts"/>
-            @else
-                <div>
-                    No posts exist yet! Come back later
-                </div>
             @endif
+        @else
+            <div>
+                No posts exist yet! Come back later
+            </div>
         @endif
-
     </main>
 </x-layout>
