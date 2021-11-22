@@ -1,15 +1,17 @@
-@extends('components/layout')
+<x-layout>
+    @include('_header')
 
-@section('content')
-    @foreach ($posts as $post)
-        <article>
-            <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
-            <br/>
-            By: <a href="/users/{{ $post->user->id }}" >{{ $post->user->name }} </a>
-            <br/>
-            In category: <a href="/categories/{{ $post->category->slug }}"> {{ $post->category->name }} </a>
-            <br/>
-            {{ $post->excerpt }}
-        </article>
-    @endforeach
-@endsection
+    <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+        @if(count($posts))
+            <x-post-featured-tile :post="$posts[0]"/>
+
+            @if(count($posts) > 1)
+                <x-posts-grid :posts="$posts"/>
+            @endif
+        @else
+            <div>
+                No posts exist yet! Come back later
+            </div>
+        @endif
+    </main>
+</x-layout>
