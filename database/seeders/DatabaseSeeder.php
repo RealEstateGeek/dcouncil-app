@@ -17,33 +17,35 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::truncate();
-        $user = User::factory()->create();
+        // $user = User::factory()->create();
 
         Category::truncate();
-        $personal = Category::create([
-            'name' => 'Personal',
-            'slug' => 'personal',
-        ]);
-        $work = Category::create([
-            'name' => 'Work',
-            'slug' => 'work',
-        ]);
+        // $personal = Category::create([
+        //     'name' => 'Personal',
+        //     'slug' => 'personal',
+        // ]);
+        // $work = Category::create([
+        //     'name' => 'Work',
+        //     'slug' => 'work',
+        // ]);
 
         Post::truncate();
-        Post::create([
-            'title' => 'My Personal Blog Post',
-            'excerpt' => 'About my personal life',
-            'category_id' => $personal->id,
-            'user_id' => $user->id,
-            'body' => 'This is a post all about my personal life blah blah blah',
-        ]);
+        // Post::create([
+        //     'title' => 'My Personal Blog Post',
+        //     'excerpt' => 'About my personal life',
+        //     'category_id' => $personal->id,
+        //     'user_id' => $user->id,
+        //     'body' => 'This is a post all about my personal life blah blah blah',
+        // ]);
 
-        Post::create([
-            'title' => 'My Work Blog Post',
-            'excerpt' => 'About my work life',
-            'category_id' => $work->id,
-            'user_id' => $user->id,
-            'body' => 'This is a post all about my work life blah blah blah',
-        ]);
+        // Post::create([
+        //     'title' => 'My Work Blog Post',
+        //     'excerpt' => 'About my work life',
+        //     'category_id' => $work->id,
+        //     'user_id' => $user->id,
+        //     'body' => 'This is a post all about my work life blah blah blah',
+        // ]);
+
+        Post::factory(5)->create();
     }
 }
