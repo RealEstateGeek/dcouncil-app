@@ -3,7 +3,7 @@
 @section('content')
     <article>
         <h1>
-            {{ $post->title }} By <a href="/posts/{{ $post->user->id }}">{{ $post->user->name }}</a>
+            {{ $post->title }} By {{ $post->user->name }}
         </h1>
         <div>
             {!! $post->body !!}
