@@ -6,10 +6,10 @@
             <x-post-featured-tile :post="$posts[0]"/>
 
             @if(count($posts) > 1)
-                <div class="lg:grid lg:grid-cols-2">
-                    @foreach ($posts->skip(1) as $post)
-                        <x-post-tile :post="$post"/>
-                    @endforeach
+                <x-posts-grid :posts="$posts"/>
+            @else
+                <div>
+                    No posts exist yet! Come back later
                 </div>
             @endif
         @endif
