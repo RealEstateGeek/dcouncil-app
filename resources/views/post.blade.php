@@ -1,6 +1,6 @@
-@extends('components/layout')
-
-@section('content')
+<x-layout>
+    @include('_header')
+    
     <article>
         <h1>
             {{ $post->title }} By {{ $post->user->name }}
@@ -10,4 +10,4 @@
         </div>
     </article>
     <a href="/posts">Back to posts</a>
-@endsection
+</x-layout>
