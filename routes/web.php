@@ -1,8 +1,9 @@
 <?php
 
 use App\Models\Category;
-use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use App\Models\User;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ use App\Models\Post;
 
 Route::get('/posts', function () {
     return view('posts', [
-        'posts' => Post::with('category')->get()
+        'posts' => Post::with('category')->get(),
     ]);
 });
 
@@ -25,13 +26,20 @@ Route::get('/posts', function () {
 // For tweaking, see Post->getRouteKeyName
 Route::get('/posts/{post}', function(Post $post) {
     return view('post', [
-        'post' => $post
+        'post' => $post,
     ]);
 });
 
 // Using the category slug to display all posts related to a particular category
 Route::get('/categories/{category:slug}', function(Category $category) {
     return view('posts', [
-        'posts' => $category->posts
+        'posts' => $category->posts,
+    ]);
+});
+
+//Using the user ID to display all posts related to a particular User
+Route::get('/users/{user}', function (User $user) {
+    return view('posts', [
+        'posts' => $user->posts,
     ]);
 });

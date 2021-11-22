@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             'slug' => 'work',
         ]);
 
+        Post::truncate();
         Post::create([
             'title' => 'My Personal Blog Post',
             'excerpt' => 'About my personal life',
