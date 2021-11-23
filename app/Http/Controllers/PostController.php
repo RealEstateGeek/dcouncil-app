@@ -9,10 +9,9 @@ class PostController extends Controller
 {
     public function index()
     {
-        return view('posts', [
+        return view('posts.index', [
             'posts' => Post::latest()->filter(request(['search', 'category']))->with('category', 'user')->get(),
             'categories' => Category::all(),
-            'currentCategory' => Category::firstWhere('slug', request('category')),
         ]);
     }
 
@@ -23,7 +22,7 @@ class PostController extends Controller
     {
         // Route-model binding, when we type-hint 'Post' in this function, it tries to find a Post using binding key 'id'
         // For tweaking the key, see Post->getRouteKeyName()
-        return view('post', [
+        return view('posts.view', [
             'post' => $post,
         ]);
     }
