@@ -6,9 +6,11 @@
                 <x-svg name="down-arrow" class="absolute pointer-events-none" style="right: 12px;"/>
             </button>
         </x-slot>
-        <x-dropdown-item href="/posts">All</x-dropdown-item>
+        <x-dropdown-item href="/posts/?{{ http_build_query(request()->except('category', 'page')) }}">
+            All
+        </x-dropdown-item>
         @foreach ($categories as $category)
-            <x-dropdown-item href="/posts/?category={{ $category->slug }}&{{ http_build_query(request()->except('category')) }}"
+            <x-dropdown-item href="/posts/?category={{ $category->slug }}&{{ http_build_query(request()->except('category', 'page')) }}"
                 :active="isset($currentCategory) && $currentCategory->is($category)"
             >
                 {{ ucwords($category->name) }}
