@@ -3,6 +3,7 @@
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,29 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/posts', function () {
-    // start a query object, we call get in the return statement
-    $posts = Post::latest()->with('category', 'user');
+Route::get('/posts', [PostController::class, 'index']);
 
-    // If we have GET parameters on the URI, use them to filter results
-    if (request('search')) {
-        $posts->where('title', 'LIKE', '%' . request('search') . '%')
-            ->orWhere('body', 'LIKE', '%' . request('search') . '%');
-    }
-
-    return view('posts', [
-        'posts' => $posts->get(),
-        'categories' => Category::all(),
-    ]);
-});
-
-// Route-model binding, when we type-hint 'Post' here, it tries to find a Post using binding key 'id'
-// For tweaking, see Post->getRouteKeyName
-Route::get('/posts/{post}', function(Post $post) {
-    return view('post', [
-        'post' => $post,
-    ]);
-});
+Route::get('/posts/{post}', [PostController::class, 'view']);
 
 // Using the category slug to display all posts related to a particular category
 Route::get('/categories/{category:slug}', function(Category $category) {
