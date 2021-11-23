@@ -40,6 +40,11 @@ class Post extends Model
             $query->where('title', 'LIKE', '%' . $search . '%')
                 ->orWhere('body', 'LIKE', '%' . $search . '%');
         });
+        $query->when($filters['category'] ?? false, function ($query, $category) {
+            $query->whereHas('category', function ($query) use ($category) {
+                $query->where('slug', '=', $category);
+            });
+        });
 
         return $query;
     }

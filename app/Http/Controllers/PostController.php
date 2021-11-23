@@ -10,8 +10,9 @@ class PostController extends Controller
     public function index()
     {
         return view('posts', [
-            'posts' => Post::latest()->filter(request(['search']))->with('category', 'user')->get(),
+            'posts' => Post::latest()->filter(request(['search', 'category']))->with('category', 'user')->get(),
             'categories' => Category::all(),
+            'currentCategory' => Category::firstWhere('slug', request('category')),
         ]);
     }
 

@@ -21,15 +21,6 @@ Route::get('/posts', [PostController::class, 'index']);
 
 Route::get('/posts/{post}', [PostController::class, 'view']);
 
-// Using the category slug to display all posts related to a particular category
-Route::get('/categories/{category:slug}', function(Category $category) {
-    return view('posts', [
-        'posts' => $category->posts,
-        'currentCategory' => $category,
-        'categories' => Category::all(),
-    ]);
-});
-
 //Using the user ID to display all posts related to a particular User
 Route::get('/users/{user}', function (User $user) {
     return view('posts', [
