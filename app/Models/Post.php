@@ -45,6 +45,11 @@ class Post extends Model
                 $query->where('slug', '=', $category);
             });
         });
+        $query->when($filters['user'] ?? false, function ($query, $user) {
+            $query->whereHas('user', function ($query) use ($user) {
+                $query->where('id', '=', $user);
+            });
+        });
 
         return $query;
     }

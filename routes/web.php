@@ -18,13 +18,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/posts', [PostController::class, 'index']);
-
 Route::get('/posts/{post}', [PostController::class, 'view']);
-
-//Using the user ID to display all posts related to a particular User
-Route::get('/users/{user}', function (User $user) {
-    return view('posts', [
-        'posts' => $user->posts,
-        'categories' => Category::all(),
-    ]);
-});
