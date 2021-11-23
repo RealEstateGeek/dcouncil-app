@@ -17,8 +17,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/posts', function () {
+    // start a query object, we call get in the return statement
+    $posts = Post::latest()->with('category', 'user');
+
+    // If we have GET parameters on the URI, use them to filter results
+    if (request('search')) {
+        $posts->where('title', 'LIKE', '%' . request('search') . '%')
+            ->orWhere('body', 'LIKE', '%' . request('search') . '%');
+    }
+
     return view('posts', [
-        'posts' => Post::latest()->with('category', 'user')->get(),
+        'posts' => $posts->get(),
         'categories' => Category::all(),
     ]);
 });
