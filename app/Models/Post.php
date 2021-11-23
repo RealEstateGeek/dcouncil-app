@@ -37,8 +37,10 @@ class Post extends Model
     {
         // If we have GET parameters from the URI, use them to search the title and body texts
         $query->when($filters['search'] ?? false, function ($query, $search) {
-            $query->where('title', 'LIKE', '%' . $search . '%')
-                ->orWhere('body', 'LIKE', '%' . $search . '%');
+            $query->where(function ($query) use ($search) {
+                $query->where('title', 'LIKE', '%' . $search . '%')
+                    ->orWhere('body', 'LIKE', '%' . $search . '%');
+            });
         });
         $query->when($filters['category'] ?? false, function ($query, $category) {
             $query->whereHas('category', function ($query) use ($category) {
