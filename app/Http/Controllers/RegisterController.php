@@ -20,7 +20,10 @@ class RegisterController extends Controller
             'password' => ['required', 'min:7', 'max:255'],
         ]);
 
-        User::create($attributes);
+        $user =User::create($attributes);
+
+        // Here we want to log hte user in, using session presumably
+        auth()->login($user);
 
         // Redirect to home page, with message sent to session under registerSuccess key
         return redirect('/posts')->with('registerSuccess', 'Your account was successfully created');
