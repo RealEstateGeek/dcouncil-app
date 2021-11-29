@@ -2,22 +2,10 @@
     <section class="px-6 py-8">
         <main class="max-w-lg mx-auto">
             <h1 class="text-center font-bold text-xl">
-                Register
+                Login
             </h1>
-            <form method="POST" action="/register" class="mt-10">
+            <form action="/login" method="POST">
                 @csrf
-                <div class="mb-6">
-                    <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="name">
-                        Name
-                    </label>
-                    <input type="text" class="border border-gray-400 p-2 w-full"
-                        name="name" id="name" required value="{{ old('name') }}">
-                    @error('name')
-                        <p class="text-xs mt-2 text-red-500">
-                            {{ $message }}
-                        </p>
-                    @enderror
-                </div>
                 <div class="mb-6">
                     <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="email">
                         Email Address

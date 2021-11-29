@@ -15,10 +15,25 @@
                 </a>
             </div>
 
-            <div class="mt-8 md:mt-0">
-                <a href="/register" class="text-xs font-bold uppercase">
-                    Register
-                </a>
+            <div class="mt-8 md:mt-0 flex">
+                @guest
+                    <a href="/register" class="text-xs font-bold uppercase">
+                        Register
+                    </a>
+                    <a href="/login" class="text-xs font-bold uppercase ml-4">
+                        Login
+                    </a>
+                @else
+                    <a href="/register" class="text-xs font-bold uppercase">
+                        Welcome {{ auth()->user()->name }}
+                    </a>
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <button type="submit">
+                            Logout
+                        </button>
+                    </form>
+                @endguest
                 <a href="#" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
                     Subscribe for Updates
                 </a>
