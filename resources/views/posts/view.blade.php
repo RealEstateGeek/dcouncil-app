@@ -16,7 +16,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-span-8">
                     <div class="hidden lg:flex justify-between mb-6">
                         <a href="/posts"
@@ -33,7 +32,6 @@
 
                             Back to Posts
                         </a>
-
                         <div class="space-x-2">
                             <x-category-link :category="$post->category" />
                         </div>
@@ -47,6 +45,9 @@
                         {!! $post->body !!}
                     </div>
                 </div>
+                <section class="col-span-8 col-start-5">
+                    <x-post-comment />
+                </section>
             </article>
         </main>
     </section>
