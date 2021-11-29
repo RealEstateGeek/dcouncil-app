@@ -1,8 +1,6 @@
 <?php
 
-use App\Models\Category;
-use App\Models\Post;
-use App\Models\User;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
@@ -21,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/posts', [PostController::class, 'index'])->name('home');
 Route::get('/posts/{post}', [PostController::class, 'view']);
+Route::post('/posts/{post:id}/comment', [CommentController::class, 'store']);
 
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest');

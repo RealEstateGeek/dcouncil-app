@@ -2,7 +2,7 @@
 
 <article class="flex">
     <div>
-        <img src="https://i.pravatar.cc/100?u={{ $comment->id }}" alt="Avatar">
+        <img src="https://i.pravatar.cc/100?u={{ $comment->user_id }}" alt="Avatar">
     </div>
     <div>
         <header>
@@ -13,7 +13,6 @@
                 Posted <time>{{ $comment->created_at }}</time>
             </p>
         </header>
-
         <p>
             {{ $comment->body }}
         </p>

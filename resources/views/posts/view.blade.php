@@ -36,20 +36,19 @@
                             <x-category-link :category="$post->category" />
                         </div>
                     </div>
-
                     <h1 class="font-bold text-3xl lg:text-4xl mb-10">
                         {{ $post->title }}
                     </h1>
-
                     <div class="space-y-4 lg:text-lg leading-loose">
                         {!! $post->body !!}
                     </div>
                 </div>
                 <section class="col-span-8 col-start-5">
+                    {{-- vanilla php include --}}
+                    @include('posts._add-comment-form')
                     @foreach($post->comments as $comment)
                         <x-post-comment :comment="$comment"/>
                     @endforeach
-
                 </section>
             </article>
         </main>
