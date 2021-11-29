@@ -47,6 +47,11 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     /**
      * Ensures that when we set the password, it gets hashed first
      * @param string $password

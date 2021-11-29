@@ -1,19 +1,21 @@
+@props(['comment'])
+
 <article class="flex">
     <div>
-        <img src="https://i.pravatar.cc/100" alt="Avatar">
+        <img src="https://i.pravatar.cc/100?u={{ $comment->id }}" alt="Avatar">
     </div>
     <div>
         <header>
             <h3>
-                John Doe
+                {{ $comment->user->name }}
             </h3>
             <p class="text-xs">
-                Posted <time>8 months ago</time>
+                Posted <time>{{ $comment->created_at }}</time>
             </p>
         </header>
 
         <p>
-            Blah Blah here is my comment abot your post.
+            {{ $comment->body }}
         </p>
     </div>
 </article>
