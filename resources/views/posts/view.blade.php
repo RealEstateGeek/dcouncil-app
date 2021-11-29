@@ -16,7 +16,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-span-8">
                     <div class="hidden lg:flex justify-between mb-6">
                         <a href="/posts"
@@ -33,7 +32,6 @@
 
                             Back to Posts
                         </a>
-
                         <div class="space-x-2">
                             <x-category-link :category="$post->category" />
                         </div>
@@ -44,9 +42,15 @@
                     </h1>
 
                     <div class="space-y-4 lg:text-lg leading-loose">
-                        <p>{{ $post->body }}</p>
+                        {!! $post->body !!}
                     </div>
                 </div>
+                <section class="col-span-8 col-start-5">
+                    @foreach($post->comments as $comment)
+                        <x-post-comment :comment="$comment"/>
+                    @endforeach
+
+                </section>
             </article>
         </main>
     </section>

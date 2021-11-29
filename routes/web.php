@@ -3,6 +3,9 @@
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,30 +19,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/posts', function () {
-    return view('posts', [
-        'posts' => Post::latest()->with('category', 'user')->get(),
-    ]);
-});
+Route::get('/posts', [PostController::class, 'index'])->name('home');
+Route::get('/posts/{post}', [PostController::class, 'view']);
 
-// Route-model binding, when we type-hint 'Post' here, it tries to find a Post using binding key 'id'
-// For tweaking, see Post->getRouteKeyName
-Route::get('/posts/{post}', function(Post $post) {
-    return view('post', [
-        'post' => $post,
-    ]);
-});
+Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
+Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
 
-// Using the category slug to display all posts related to a particular category
-Route::get('/categories/{category:slug}', function(Category $category) {
-    return view('posts', [
-        'posts' => $category->posts,
-    ]);
-});
-
-//Using the user ID to display all posts related to a particular User
-Route::get('/users/{user}', function (User $user) {
-    return view('posts', [
-        'posts' => $user->posts,
-    ]);
-});
+Route::post('logout', [SessionController::class, 'logout'])->middleware('auth');
+Route::get('login', [SessionController::class, 'login'])->middleware('guest');
+Route::post('login', [SessionController::class, 'store'])->middleware('guest');
