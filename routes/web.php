@@ -27,3 +27,23 @@ Route::post('register', [RegisterController::class, 'store'])->middleware('guest
 Route::post('logout', [SessionController::class, 'logout'])->middleware('auth');
 Route::get('login', [SessionController::class, 'login'])->middleware('guest');
 Route::post('login', [SessionController::class, 'store'])->middleware('guest');
+
+Route::post(
+    '/newsletter',
+    function () {
+        /**
+         * @var ApiClient $mailchimp mailchip ApiClient
+         */
+        $mailchimp = new \MailchimpMarketing\ApiClient();
+
+        $mailchimp->setConfig(
+            [
+                'apiKey' => config('services.mailchimp.key'),
+                'server' => 'us20',
+            ]
+        );
+
+        $response = $mailchimp->lists
+        ddd($response);
+    }
+);
