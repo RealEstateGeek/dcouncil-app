@@ -31,9 +31,6 @@ Route::post('login', [SessionController::class, 'store'])->middleware('guest');
 Route::post(
     '/newsletter',
     function () {
-        /**
-         * @var ApiClient $mailchimp mailchip ApiClient
-         */
         $mailchimp = new \MailchimpMarketing\ApiClient();
 
         $mailchimp->setConfig(
@@ -43,7 +40,31 @@ Route::post(
             ]
         );
 
-        $response = $mailchimp->lists
-        ddd($response);
+        try {
+            $response = $mailchimp->lists->createList(
+                [
+                    "name" => "A Basic List",
+                    "permission_reminder" => "permission_reminder",
+                    "email_type_option" => false,
+                    "contact" => [
+                        "company" => "DC Co",
+                        "address1" => "123 Abc St",
+                        "city" => "Fort Collins",
+                        "state" => "CO",
+                        "zip" => "80524",
+                        "country" => "US",
+                    ],
+                    "campaign_defaults" => [
+                        "from_name" => "List ",
+                        "from_email" => "things@example.com",
+                        "subject" => "A List!",
+                        "language" => "EN_US",
+                    ],
+                ]
+            );
+            ddd($response);
+        } catch (MailchimpMarketing\ApiException $e) {
+            echo $e->getMessage();
+        }
     }
 );
