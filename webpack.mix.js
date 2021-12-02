@@ -11,7 +11,19 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+mix.js(
+        'resources/js/app.js',
+        'public/js'
+    ).postCss(
+        'resources/css/app.css',
+        'public/css'
+    ).styles(
+        [
+            'node_modules/datatables.net-dt/css/jquery.dataTables.min.css',
+        ],
+        'public/css/vendor.css'
+    );
+
+if (mix.inProduction()) {
+    mix.version();
+}
