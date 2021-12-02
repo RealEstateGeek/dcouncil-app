@@ -1,6 +1,5 @@
 window._ = require('lodash');
 window.$ = window.jQuery = require('jquery');
-dt = require('datatables.net')(window, $);
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
