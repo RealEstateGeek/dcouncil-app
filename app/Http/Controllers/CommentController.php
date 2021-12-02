@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    /**
+     * @param Post $post
+     */
     public function store(Post $post)
     {
         request()->validate(
@@ -24,5 +28,10 @@ class CommentController extends Controller
         );
 
         return back();
+    }
+
+    public function viewTable()
+    {
+        return view('comments.commentTable', ['comments' => Comment::all()]);
     }
 }

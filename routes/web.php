@@ -28,6 +28,8 @@ Route::post('logout', [SessionController::class, 'logout'])->middleware('auth');
 Route::get('login', [SessionController::class, 'login'])->middleware('guest');
 Route::post('login', [SessionController::class, 'store'])->middleware('guest');
 
+Route::get('commentTable', [CommentController::class, 'viewTable']);
+
 Route::post(
     '/newsletter',
     function () {

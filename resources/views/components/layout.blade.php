@@ -5,6 +5,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 
 <style>
     html {
@@ -81,3 +82,5 @@
     </section>
     <x-registerFlash/>
 </body>
+@stack('scripts')
+@stack ('styles')
