@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
@@ -30,43 +31,4 @@ Route::post('login', [SessionController::class, 'store'])->middleware('guest');
 
 Route::get('commentTable', [CommentController::class, 'viewTable']);
 
-Route::post(
-    '/newsletter',
-    function () {
-        $mailchimp = new \MailchimpMarketing\ApiClient();
-
-        $mailchimp->setConfig(
-            [
-                'apiKey' => config('services.mailchimp.key'),
-                'server' => 'us20',
-            ]
-        );
-
-        try {
-            $response = $mailchimp->lists->createList(
-                [
-                    "name" => "A Basic List",
-                    "permission_reminder" => "permission_reminder",
-                    "email_type_option" => false,
-                    "contact" => [
-                        "company" => "DC Co",
-                        "address1" => "123 Abc St",
-                        "city" => "Fort Collins",
-                        "state" => "CO",
-                        "zip" => "80524",
-                        "country" => "US",
-                    ],
-                    "campaign_defaults" => [
-                        "from_name" => "List ",
-                        "from_email" => "things@example.com",
-                        "subject" => "A List!",
-                        "language" => "EN_US",
-                    ],
-                ]
-            );
-            ddd($response);
-        } catch (MailchimpMarketing\ApiException $e) {
-            echo $e->getMessage();
-        }
-    }
-);
+Route::post('/newsletter', NewsletterController::class);
