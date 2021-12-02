@@ -19,16 +19,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/posts', [PostController::class, 'index'])->name('home');
-Route::get('/posts/{post}', [PostController::class, 'view']);
-Route::post('/posts/{post:id}/comment', [CommentController::class, 'store']);
+Route::get('posts/{post}', [PostController::class, 'view']);
+Route::post('posts/{post:id}/comment', [CommentController::class, 'store']);
 
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
 
 Route::post('logout', [SessionController::class, 'logout'])->middleware('auth');
-Route::get('login', [SessionController::class, 'login'])->middleware('guest');
+Route::get('login', [SessionController::class, 'login'])->middleware('guest')->name('login');
 Route::post('login', [SessionController::class, 'store'])->middleware('guest');
 
 Route::get('commentTable', [CommentController::class, 'viewTable']);
 
-Route::post('/newsletter', NewsletterController::class);
+Route::post('newsletter', NewsletterController::class);
+
+Route::get('admin/posts/create', [PostController::class, 'create'])->middleware('admin');

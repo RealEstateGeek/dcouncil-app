@@ -29,4 +29,12 @@ class PostController extends Controller
             'post' => $post,
         ]);
     }
+
+    /**
+     * Display a form for creating a new blog post
+     */
+    public function create()
+    {
+        return view('posts.create');
+    }
 }
