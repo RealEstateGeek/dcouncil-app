@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,10 +17,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::truncate();
         $user = User::factory()->create();
 
-        Category::truncate();
+        // Category::truncate();
         $personal = Category::create([
             'name' => 'Personal',
             'slug' => 'personal',
@@ -29,8 +29,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'work',
         ]);
 
-        Post::truncate();
-        Post::create([
+        // Post::truncate();
+        $personalPost = Post::create([
             'title' => 'My Personal Blog Post',
             'excerpt' => 'About my personal life',
             'category_id' => $personal->id,
@@ -47,5 +47,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Post::factory(20)->create();
+
+        Comment::factory(50)->create(['post_id' => $personalPost->id]);
     }
 }
