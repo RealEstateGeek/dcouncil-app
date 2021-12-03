@@ -5,13 +5,8 @@
         </h1>
         <form action="/admin/posts" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="mb-6">
-                <label for="title" class="block mb-2 uppercase font-bold text-xs text-gray-700">Title</label>
-                <input type="text" id="title" name="title" class="border border-gray-400 p-2 w-full" value="{{ old('title') }}" required>
-                @error('title')
-                    <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
-                @enderror
-            </div>
+            <x-form-input name="title"></x-form-input>
+            {{-- TODO extract more blade components --}}
             <div class="mb-6">
                 <label for="thumbnail" class="block mb-2 uppercase font-bold text-xs text-gray-700">Thumbnail</label>
                 <input type="file" id="thumbnail" name="thumbnail" class="border border-gray-400 p-2 w-full">
