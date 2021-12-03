@@ -26,9 +26,12 @@ class PostController extends Controller
     {
         // Route-model binding, when we type-hint 'Post' in this function, it tries to find a Post using binding key 'id'
         // For tweaking the key, see Post->getRouteKeyName()
-        return view('posts.view', [
-            'post' => $post,
-        ]);
+        return view(
+            'posts.view',
+            [
+                'post' => $post,
+            ]
+        );
     }
 
     /**
@@ -39,6 +42,9 @@ class PostController extends Controller
         return view('posts.create');
     }
 
+    /**
+     * Take form data and create/store a new post object
+     */
     public function store()
     {
         $attributes = request()->validate(
@@ -50,9 +56,15 @@ class PostController extends Controller
                     'required',
                     Rule::exists('categories', 'id'),
                 ],
+                'thumbnail' => [
+                    'required',
+                    'image',
+                ],
             ]
         );
         $attributes['user_id'] = auth()->user()->id;
+        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+
         Post::create($attributes);
 
         return redirect('/posts');
