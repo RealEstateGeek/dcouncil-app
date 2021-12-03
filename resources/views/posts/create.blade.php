@@ -6,25 +6,9 @@
         <form action="/admin/posts" method="POST" enctype="multipart/form-data">
             @csrf
             <x-form-input name="title"></x-form-input>
-            {{-- TODO extract more blade components --}}
-            <div class="mb-6">
-                <label for="thumbnail" class="block mb-2 uppercase font-bold text-xs text-gray-700">Thumbnail</label>
-                <input type="file" id="thumbnail" name="thumbnail" class="border border-gray-400 p-2 w-full">
-            </div>
-            <div class="mb-6 max-w-sm mx-auto">
-                <label for="excerpt" class="block mb-2 uppercase font-bold text-xs text-gray-700">Excerpt</label>
-                <textarea id="excerpt" name="excerpt" class="border border-gray-400 p-2 w-full" required>{{ old('excerpt') }}</textarea>
-                @error('excerpt')
-                    <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
-                @enderror
-            </div>
-            <div class="mb-6 max-w-sm mx-auto">
-                <label for="body" class="block mb-2 uppercase font-bold text-xs text-gray-700">Body</label>
-                <textarea id="body" name="body" class="border border-gray-400 p-2 w-full" required>{{ old('body') }}</textarea>
-                @error('body')
-                    <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
-                @enderror
-            </div>
+            <x-form-input name="thumbnail" type="file"></x-form-input>
+            <x-form-textarea name="excerpt"></x-form-textarea>
+            <x-form-textarea name="body"></x-form-textarea>
             <div class="mb-6 max-w-sm mx-auto">
                 <label for="category_id" class="block mb-2 uppercase font-bold text-xs text-gray-700">Category</label>
                 <select name="category_id" id="category_id">
