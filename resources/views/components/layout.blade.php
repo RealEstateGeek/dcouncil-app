@@ -1,6 +1,7 @@
 <!doctype html>
 
-<title>Laravel From Scratch Blog</title>
+<title>DC's Laravel From Scratch Blog</title>
+{{-- TODO move all these stylesheets and scripts into mix file --}}
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -38,7 +39,8 @@
                                 Welcome {{ auth()->user()->name }}
                             </button>
                         </x-slot>
-                        <x-dropdown-item href="admin/posts/create" :active="request()->is('admin/posts/create')">Create Post</x-dropdown-item>
+                        <x-dropdown-item href="/admin/posts" :active="request()->is('/admin/posts')">Manage Posts</x-dropdown-item>
+                        <x-dropdown-item href="/admin/posts/create" :active="request()->is('/admin/posts/create')">Create Post</x-dropdown-item>
                         <x-dropdown-item href="/logout" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">Log Out</x-dropdown-item>
                     </x-dropdown>
                     <form id="logout-form" action="/logout" method="POST" class="hidden">
