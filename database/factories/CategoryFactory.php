@@ -19,3 +19,6 @@ class CategoryFactory extends Factory
         ];
     }
 }
+
+print( 2+2)
+    
