@@ -1,5 +1,8 @@
 <?php
 
+print("big 6'6!")
+print("Uncommon") #UD diabolical
+
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
